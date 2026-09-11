@@ -10,6 +10,59 @@ working bot: live order placement, account wiring, API keys and the desktop UI a
 not included. The system is a personal research project and currently paper-trades
 on Binance testnet. Nothing here is financial advice.
 
+## The control panel
+
+The bot ships with a PyQt6 desktop launcher (called Sprocket) that supervises the
+process and shows exactly what the bot is doing. This is the live app on Binance
+testnet:
+
+![Sprocket dashboard on Binance testnet](docs/dashboard.png)
+
+The left sidebar is the navigation; the Dashboard tab shown above is the live
+cockpit.
+
+**Sidebar tabs**
+
+- **Dashboard** - the live overview shown above.
+- **Positions** - every open position with margin, entry, mark price and live PnL.
+- **History** - closed trades and their outcomes.
+- **Risk** - the risk controls: the drawdown kill switch, loss limits and exposure
+  caps.
+- **Alerts** - notifications when something needs attention.
+- **Console** - the bot's live log stream.
+- **Config** - the strategy and execution settings (the same file the optimiser
+  rewrites when it promotes a new champion).
+- **API Keys** - exchange credentials, entered by the user at runtime and never
+  stored in the repository.
+
+**Dashboard panels**
+
+- **Account Balance** with the start-of-run baseline and fees, plus start and stop
+  controls.
+- **A KPI strip**: daily and all-time PnL, win rate, unrealised PnL, trade
+  frequency, order size, average win versus loss, average duration, and the
+  countdown to the next 4H candle close (the only moment a new entry can fire).
+- **Last Signal and Last Trade** - the most recent gate signal (symbol, side,
+  entry, stop, target) and the most recent closed trade.
+- **Kill Switch** - the drawdown circuit breaker; it trips after the configured
+  number of losses and halts trading.
+- **The 4H chart** for the current symbol, with the EMA 8/21/55 overlays the
+  strategy watches, a Macro Gate panel showing whether longs or shorts are open
+  and why (the EMA stack alignment and the 32-hour momentum check), and the live
+  Stop, Entry, Trail and Mark price lines.
+- **Equity Curve** - account value across the run.
+- **AI Champion** - the parameter set the walk-forward optimiser currently favours
+  (stop loss, trailing start and callback, the auto-pause rule, the minimum EMA
+  gap) with the backtest win rate, PnL and score that won it, plus an Auto Improve
+  button that launches a fresh search.
+- **Market Pulse** - a bear/bull gauge from the broader market.
+- **PnL Calendar** - daily profit and loss at a glance.
+- **Open Positions** - the live table of what the bot is currently holding.
+- **Crypto News** - a headline feed for market context.
+
+The footer shows bot status, websocket health, the current market regime, the pair
+count and the feed time. Balances shown are simulated testnet funds.
+
 ## What is in this repo
 
 | File | What it shows |
